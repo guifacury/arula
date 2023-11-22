@@ -1,0 +1,27 @@
+
+ErrorDocument 404 https://arula.zazcompany.com
+ErrorDocument 403 https://arula.zazcompany.com
+ErrorDocument 500 https://arula.zazcompany.com
+
+Options -Indexes
+
+
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+
+RewriteRule ^item/([^/]+)$ buscar_item.php?itoken=$1 [L]
+
+RewriteRule ^restaurante/([^/]+)$ buscar_restaurante.php?rest_id=$1 [L]
+RewriteRule ^qrcode/([^/]+)$ buscar_qrcode.php?token=$1 [L]
+
+RewriteRule ^passToken/([^/]+)$ buscar_passToken.php?token=$1 [L]
+
+
+
+RewriteRule ^api/getDatas/([^/]+)$ teste.php?token=$1 [L]
